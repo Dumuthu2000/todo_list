@@ -37,6 +37,27 @@ public class TodoList {
         head = newTask;
     }
 
+    // Remove the task by given ID
+    void removeTask(int id) {
+        if (head == null) {
+            System.out.println("The to-do list is empty.");
+            return;
+        }
+        if (head.id == id) {
+            head = head.next;
+            return;
+        }
+        TaskNode temp = head;
+        while (temp.next != null && temp.next.id != id) {
+            temp = temp.next;
+        }
+        if (temp.next == null) {
+            System.out.println("Task not found.");
+        } else {
+            temp.next = temp.next.next;
+        }
+    }
+
     //View already created tasks
     void viewTasks() {
         if (head == null) {
@@ -49,6 +70,7 @@ public class TodoList {
             System.out.println("ID: " + temp.id + ", Description: " + temp.description + ", Time: " + temp.time.format(formatter) + " - " + status);
             temp = temp.next;
         }
+
     }
 
 
