@@ -120,6 +120,16 @@ public class TodoList {
         return temp;
     }
 
+    // Functionality added by Member 3
+    void markTaskComplete(int id) {
+        TaskNode temp = findTask(id);
+        if (temp == null) {
+            System.out.println("Task not found.");
+        } else {
+            temp.isCompleted = true;
+        }
+    }
+
 
     //Main method
     public static void main(String[] args) {
