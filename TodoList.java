@@ -101,6 +101,25 @@ public class TodoList {
 
     }
 
+    //updating task by id
+    void updateTask(int id, String newDescription) {
+        TaskNode temp = findTask(id);
+        if (temp == null) {
+            System.out.println("Task not found.");
+        } else {
+            temp.description = newDescription;
+        }
+    }
+
+    // get task to update
+    private TaskNode findTask(int id) {
+        TaskNode temp = head;
+        while (temp != null && temp.id != id) {
+            temp = temp.next;
+        }
+        return temp;
+    }
+
 
     //Main method
     public static void main(String[] args) {
