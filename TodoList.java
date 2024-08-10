@@ -210,7 +210,7 @@ public class TodoList {
         return slow;
     }
 
-    
+
     private TaskNode merge(TaskNode left, TaskNode right) {
         if (left == null) return right;
         if (right == null) return left;
@@ -288,10 +288,29 @@ public class TodoList {
                     break;
 
                 case 9:
+                    toDoList.viewCompletedTasks();
+                    break;
+                case 10:
+                    toDoList.viewPendingTasks();
+                    break;
+                case 11:
+                    System.out.println("Total tasks: " + toDoList.countTasks());
+                    break;
+                case 12:
+                    toDoList.clearAllTasks();
+                    System.out.println("All tasks have been cleared.");
+                    break;
+                case 13:
+                    toDoList.sortTasksDescending();
+                    System.out.println("Tasks have been sorted in descending order.");
+                    break;
+
+                case 14:
                     System.out.println("Exiting...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
+
             }
         } while (choice != 4);
 
