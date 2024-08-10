@@ -130,6 +130,100 @@ public class TodoList {
         }
     }
 
+    // View completed tasks in the list
+    void viewCompletedTasks() {
+        TaskNode temp = head;
+        while (temp != null) {
+            if (temp.isCompleted) {
+                System.out.println("ID: " + temp.id + ", Description: " + temp.description + ", Time: " + temp.time.format(formatter) + " - Completed");
+            }
+            temp = temp.next;
+        }
+    }
+
+    // View pending tasks
+    void viewPendingTasks() {
+        TaskNode temp = head;
+        while (temp != null) {
+            if (!temp.isCompleted) {
+                System.out.println("ID: " + temp.id + ", Description: " + temp.description + ", Time: " + temp.time.format(formatter) + " - Pending");
+            }
+            temp = temp.next;
+        }
+    }
+
+
+    // method to count tasks
+    int countTasks() {
+        int count = 0;
+        TaskNode temp = head;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+
+
+    // method to clear all tasks at once
+    void clearAllTasks() {
+        head = null;
+    }
+
+
+    // method to sort tasks in descending order
+    void sortTasksDescending() {
+        head = mergeSort(head);
+    }
+
+
+    // defining mergesort method
+    private TaskNode mergeSort(TaskNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        TaskNode middle = getMiddle(head);
+        TaskNode nextOfMiddle = middle.next;
+
+        middle.next = null;
+
+        TaskNode left = mergeSort(head);
+        TaskNode right = mergeSort(nextOfMiddle);
+
+        return merge(left, right);
+    }
+
+    // method to get middle to-do-item
+    private TaskNode getMiddle(TaskNode head) {
+        if (head == null) {
+            return head;
+        }
+
+        TaskNode slow = head, fast = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+
+    private TaskNode merge(TaskNode left, TaskNode right) {
+        if (left == null) return right;
+        if (right == null) return left;
+
+        if (left.time.isAfter(right.time)) {
+            left.next = merge(left.next, right);
+            return left;
+        } else {
+            right.next = merge(left, right.next);
+            return right;
+        }
+    }
+
 
     //Main method
     public static void main(String[] args) {
@@ -194,10 +288,29 @@ public class TodoList {
                     break;
 
                 case 9:
+                    toDoList.viewCompletedTasks();
+                    break;
+                case 10:
+                    toDoList.viewPendingTasks();
+                    break;
+                case 11:
+                    System.out.println("Total tasks: " + toDoList.countTasks());
+                    break;
+                case 12:
+                    toDoList.clearAllTasks();
+                    System.out.println("All tasks have been cleared.");
+                    break;
+                case 13:
+                    toDoList.sortTasksDescending();
+                    System.out.println("Tasks have been sorted in descending order.");
+                    break;
+
+                case 14:
                     System.out.println("Exiting...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
+
             }
         } while (choice != 4);
 
