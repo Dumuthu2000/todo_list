@@ -58,6 +58,16 @@ public class TodoList {
         }
     }
 
+
+    //Remove a task from the beginning of the List
+    void removeTaskAtBeginning() {
+        if (head == null) {
+            System.out.println("The to-do list is empty.");
+            return;
+        }
+        head = head.next;
+    }
+
     //View already created tasks
     void viewTasks() {
         if (head == null) {
