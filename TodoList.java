@@ -132,6 +132,19 @@ public class TodoList {
                     toDoList.viewTasks();
                     break;
                 case 4:
+                    System.out.print("Enter task ID to remove: ");
+                    int removeId = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    toDoList.removeTask(removeId);
+                    break;
+                case 5:
+                    toDoList.removeTaskAtBeginning();
+                    break;
+                case 6:
+                    toDoList.removeTaskAtEnd();
+                    break;
+
+                case 7:
                     System.out.println("Exiting...");
                     break;
                 default:
