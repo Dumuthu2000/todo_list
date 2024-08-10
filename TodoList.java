@@ -141,6 +141,18 @@ public class TodoList {
         }
     }
 
+    // View pending tasks
+    void viewPendingTasks() {
+        TaskNode temp = head;
+        while (temp != null) {
+            if (!temp.isCompleted) {
+                System.out.println("ID: " + temp.id + ", Description: " + temp.description + ", Time: " + temp.time.format(formatter) + " - Pending");
+            }
+            temp = temp.next;
+        }
+    }
+
+
 
     //Main method
     public static void main(String[] args) {
