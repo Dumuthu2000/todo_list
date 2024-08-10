@@ -130,6 +130,17 @@ public class TodoList {
         }
     }
 
+    // View completed tasks in the list
+    void viewCompletedTasks() {
+        TaskNode temp = head;
+        while (temp != null) {
+            if (temp.isCompleted) {
+                System.out.println("ID: " + temp.id + ", Description: " + temp.description + ", Time: " + temp.time.format(formatter) + " - Completed");
+            }
+            temp = temp.next;
+        }
+    }
+
 
     //Main method
     public static void main(String[] args) {
