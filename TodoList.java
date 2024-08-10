@@ -68,6 +68,24 @@ public class TodoList {
         head = head.next;
     }
 
+
+    //Remove a task from the end of the list
+    void removeTaskAtEnd() {
+        if (head == null) {
+            System.out.println("The to-do list is empty.");
+            return;
+        }
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+        TaskNode temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        temp.next = null;
+    }
+
     //View already created tasks
     void viewTasks() {
         if (head == null) {
