@@ -37,6 +37,55 @@ public class TodoList {
         head = newTask;
     }
 
+    // Remove the task by given ID
+    void removeTask(int id) {
+        if (head == null) {
+            System.out.println("The to-do list is empty.");
+            return;
+        }
+        if (head.id == id) {
+            head = head.next;
+            return;
+        }
+        TaskNode temp = head;
+        while (temp.next != null && temp.next.id != id) {
+            temp = temp.next;
+        }
+        if (temp.next == null) {
+            System.out.println("Task not found.");
+        } else {
+            temp.next = temp.next.next;
+        }
+    }
+
+
+    //Remove a task from the beginning of the List
+    void removeTaskAtBeginning() {
+        if (head == null) {
+            System.out.println("The to-do list is empty.");
+            return;
+        }
+        head = head.next;
+    }
+
+
+    //Remove a task from the end of the list
+    void removeTaskAtEnd() {
+        if (head == null) {
+            System.out.println("The to-do list is empty.");
+            return;
+        }
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+        TaskNode temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        temp.next = null;
+    }
+
     //View already created tasks
     void viewTasks() {
         if (head == null) {
@@ -49,6 +98,7 @@ public class TodoList {
             System.out.println("ID: " + temp.id + ", Description: " + temp.description + ", Time: " + temp.time.format(formatter) + " - " + status);
             temp = temp.next;
         }
+
     }
 
 
@@ -82,6 +132,19 @@ public class TodoList {
                     toDoList.viewTasks();
                     break;
                 case 4:
+                    System.out.print("Enter task ID to remove: ");
+                    int removeId = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    toDoList.removeTask(removeId);
+                    break;
+                case 5:
+                    toDoList.removeTaskAtBeginning();
+                    break;
+                case 6:
+                    toDoList.removeTaskAtEnd();
+                    break;
+
+                case 7:
                     System.out.println("Exiting...");
                     break;
                 default:
