@@ -152,6 +152,18 @@ public class TodoList {
         }
     }
 
+    
+    // method to count tasks
+    int countTasks() {
+        int count = 0;
+        TaskNode temp = head;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+
 
 
     //Main method
