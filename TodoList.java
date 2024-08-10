@@ -101,6 +101,35 @@ public class TodoList {
 
     }
 
+    //updating task by id
+    void updateTask(int id, String newDescription) {
+        TaskNode temp = findTask(id);
+        if (temp == null) {
+            System.out.println("Task not found.");
+        } else {
+            temp.description = newDescription;
+        }
+    }
+
+    // get task to update
+    private TaskNode findTask(int id) {
+        TaskNode temp = head;
+        while (temp != null && temp.id != id) {
+            temp = temp.next;
+        }
+        return temp;
+    }
+
+    // Functionality added by Member 3
+    void markTaskComplete(int id) {
+        TaskNode temp = findTask(id);
+        if (temp == null) {
+            System.out.println("Task not found.");
+        } else {
+            temp.isCompleted = true;
+        }
+    }
+
 
     //Main method
     public static void main(String[] args) {
@@ -112,7 +141,12 @@ public class TodoList {
             System.out.println("1. Add Task");
             System.out.println("2. Add Task at Beginning");
             System.out.println("3. View All Tasks");
-            System.out.println("4. Exit");
+            System.out.println("4. Remove Task");
+            System.out.println("5. Remove Task at Beginning");
+            System.out.println("6. Remove Task at End");
+            System.out.println("7. Update Task");
+            System.out.println("8. Mark Task as Complete");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine();  // Consume newline
@@ -145,6 +179,21 @@ public class TodoList {
                     break;
 
                 case 7:
+                    System.out.print("Enter task ID to update: ");
+                    int updateId = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    System.out.print("Enter new task description: ");
+                    String newDescription = scanner.nextLine();
+                    toDoList.updateTask(updateId, newDescription);
+                    break;
+                case 8:
+                    System.out.print("Enter task ID to mark as complete: ");
+                    int completeId = scanner.nextInt();
+                    scanner.nextLine();  // Consume newline
+                    toDoList.markTaskComplete(completeId);
+                    break;
+
+                case 9:
                     System.out.println("Exiting...");
                     break;
                 default:
