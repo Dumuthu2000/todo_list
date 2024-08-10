@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class TodoList {
     private TaskNode head;
@@ -36,8 +37,25 @@ public class TodoList {
         head = newTask;
     }
 
+    //View already created tasks
+    void viewTasks() {
+        if (head == null) {
+            System.out.println("The to-do list is empty.");
+            return;
+        }
+        TaskNode temp = head;
+        while (temp != null) {
+            String status = temp.isCompleted ? "Completed" : "Pending";
+            System.out.println("ID: " + temp.id + ", Description: " + temp.description + ", Time: " + temp.time.format(formatter) + " - " + status);
+            temp = temp.next;
+        }
+    }
+
+
     //Main method
     public static void main(String[] args) {
-
+        TodoList toDoList = new TodoList();
+        Scanner scanner = new Scanner(System.in);
+        int choice;
     }
 }
