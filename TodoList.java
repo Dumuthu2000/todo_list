@@ -57,5 +57,38 @@ public class TodoList {
         TodoList toDoList = new TodoList();
         Scanner scanner = new Scanner(System.in);
         int choice;
+
+        do {
+            System.out.println("1. Add Task");
+            System.out.println("2. Add Task at Beginning");
+            System.out.println("3. View All Tasks");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter task description: ");
+                    String description = scanner.nextLine();
+                    toDoList.addTask(description);
+                    break;
+                case 2:
+                    System.out.print("Enter task description: ");
+                    description = scanner.nextLine();
+                    toDoList.addTaskAtBeginning(description);
+                    break;
+                case 3:
+                    toDoList.viewTasks();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 4);
+
+        scanner.close();
     }
 }
