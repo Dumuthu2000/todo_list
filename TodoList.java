@@ -152,7 +152,7 @@ public class TodoList {
         }
     }
 
-    
+
     // method to count tasks
     int countTasks() {
         int count = 0;
@@ -164,6 +164,65 @@ public class TodoList {
         return count;
     }
 
+
+    // method to clear all tasks at once
+    void clearAllTasks() {
+        head = null;
+    }
+
+
+    // method to sort tasks in descending order
+    void sortTasksDescending() {
+        head = mergeSort(head);
+    }
+
+
+    // defining mergesort method
+    private TaskNode mergeSort(TaskNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        TaskNode middle = getMiddle(head);
+        TaskNode nextOfMiddle = middle.next;
+
+        middle.next = null;
+
+        TaskNode left = mergeSort(head);
+        TaskNode right = mergeSort(nextOfMiddle);
+
+        return merge(left, right);
+    }
+
+    // method to get middle to-do-item
+    private TaskNode getMiddle(TaskNode head) {
+        if (head == null) {
+            return head;
+        }
+
+        TaskNode slow = head, fast = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+
+    
+    private TaskNode merge(TaskNode left, TaskNode right) {
+        if (left == null) return right;
+        if (right == null) return left;
+
+        if (left.time.isAfter(right.time)) {
+            left.next = merge(left.next, right);
+            return left;
+        } else {
+            right.next = merge(left, right.next);
+            return right;
+        }
+    }
 
 
     //Main method
