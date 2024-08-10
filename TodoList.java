@@ -11,6 +11,7 @@ public class TodoList {
     }
 
     //Create a new Task
+    //Here new task add in the end of the list
     public void addTask(String description) {
         TaskNode newTask = new TaskNode(nextId++, description, LocalDateTime.now());
         if (head == null) {
@@ -23,7 +24,17 @@ public class TodoList {
             temp.next = newTask;
         }
     }
-    
+
+    //Add new task to the beginning of the list
+    void addTaskAtBeginning(String description) {
+        TaskNode newTask = new TaskNode(nextId++, description, LocalDateTime.now());
+        if(head == null){
+            head = newTask;
+            return;
+        }
+        newTask.next = head;
+        head = newTask;
+    }
 
     //Main method
     public static void main(String[] args) {
